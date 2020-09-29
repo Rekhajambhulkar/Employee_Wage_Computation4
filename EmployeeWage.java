@@ -1,6 +1,5 @@
 public class EmployeeWage 
 {
-
 //CONSTANTS
 public static final int Is_Employee_Present=1;
 public static final int EMP_RATE_PER_HOUR=20;
@@ -8,8 +7,8 @@ public static final int IS_FULL_TIME=1;
 public static final int IS_PART_TIME=0;
 public static final int WORKINGDAY_PER_MONTH=20;
 
-
-public static void main(String[] args)
+//Define static method
+public static int ComputeEmpWage()
 {
 //variables
 int totalEmpHours=0;
@@ -22,11 +21,11 @@ System.out.println("Welcome to the EmployeeWage Program");
 
 //Calculate Wages till total working hrs or days is reached for a month
 while(totalEmpHours <= EMP_RATE_PER_HOUR && totalWorkingDays <  WORKINGDAY_PER_MONTH )
-	{
-		totalWorkingDays++;
+{
+	totalWorkingDays++;
 
-		//generate 0-2
-		int employeeCheck=(int) Math.floor(Math.random()*10)%3;
+	//generate 0-2
+	int employeeCheck=(int) Math.floor(Math.random()*10)%3;
 /*
 * Switch Case
 */
@@ -55,6 +54,13 @@ System.out.println("Day:" +WORKINGDAY_PER_MONTH+"Emp Hour:"+empHrs);
 //Display total EmployeeWage per hour
 int totalEmpWage= totalEmpHours * EMP_RATE_PER_HOUR;
 System.out.println("Total Employee Wage:"+totalEmpWage);
+return totalEmpWage;
+}
+
+public static void main(String[] args)
+{
+	//Call Static method
+	ComputeEmpWage();
 
 }
 }
