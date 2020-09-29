@@ -1,14 +1,12 @@
 public class EmployeeWage 
 {
 //CONSTANTS
-public static final int Is_Employee_Present=1;
-public static final int EMP_RATE_PER_HOUR=20;
+
 public static final int IS_FULL_TIME=1;
 public static final int IS_PART_TIME=0;
-public static final int WORKINGDAY_PER_MONTH=20;
 
-//Define static method
-public static int ComputeEmpWage()
+//Define static method 
+public static int CalcEmpWageForCompany(String Company, int EmpRatePerHr, int NumOfDays, int MaxHrs)
 {
 //variables
 int totalEmpHours=0;
@@ -20,7 +18,7 @@ int totalWorkingDays=0;
 System.out.println("Welcome to the EmployeeWage Program");
 
 //Calculate Wages till total working hrs or days is reached for a month
-while(totalEmpHours <= EMP_RATE_PER_HOUR && totalWorkingDays <  WORKINGDAY_PER_MONTH )
+while(totalEmpHours <= MaxHrs && totalWorkingDays <  NumOfDays )
 {
 	totalWorkingDays++;
 
@@ -47,20 +45,25 @@ default :
 
 //Display Working Day per Month
 totalEmpHours+=empHrs;
-System.out.println("Day:" +WORKINGDAY_PER_MONTH+"Emp Hour:"+empHrs);
+System.out.println("Day:" +totalWorkingDays+"Emp Hour:"+empHrs);
 
 }
 
 //Display total EmployeeWage per hour
-int totalEmpWage= totalEmpHours * EMP_RATE_PER_HOUR;
-System.out.println("Total Employee Wage:"+totalEmpWage);
+int totalEmpWage= totalEmpHours * EmpRatePerHr;
+System.out.println("Total Employee Wage for Company:"+Company+ "is:"+totalEmpWage);
 return totalEmpWage;
 }
 
-public static void main(String[] args)
-{
-	//Call Static method
-	ComputeEmpWage();
+public static void main(String[] args) {
+	
+//Call Static method
+
+int totalwage = CalcEmpWageForCompany("BridgeLabz",20,3,10);
+CalcEmpWageForCompany("Thoughtworks",25,4,20);
+CalcEmpWageForCompany("Capgemini", 30,3,20);
+CalcEmpWageForCompany("Amazon",20,4,10);
+//System.out.println("TotalWage is:"+totalwage);
 
 }
 }
