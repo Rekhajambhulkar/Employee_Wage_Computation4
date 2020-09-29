@@ -1,18 +1,17 @@
 public class EmployeeWage 
 {
-//CONSTANTS
 
+//CONSTANTS
 public static final int IS_FULL_TIME=1;
 public static final int IS_PART_TIME=0;
 
-//Define static method 
+//Define static method to calculate Employee Wage for multiple Companies
 public static int CalcEmpWageForCompany(String Company, int EmpRatePerHr, int NumOfDays, int MaxHrs)
 {
 //variables
 int totalEmpHours=0;
 int empHrs=0;
 int totalWorkingDays=0;
-
 
 //Display the Welcome Message
 System.out.println("Welcome to the EmployeeWage Program");
@@ -57,13 +56,10 @@ return totalEmpWage;
 
 public static void main(String[] args) {
 	
-//Call Static method
-
+//EmployeeWage for Multiple Companies
 int totalwage = CalcEmpWageForCompany("BridgeLabz",20,3,10);
 CalcEmpWageForCompany("Thoughtworks",25,4,20);
 CalcEmpWageForCompany("Capgemini", 30,3,20);
 CalcEmpWageForCompany("Amazon",20,4,10);
-//System.out.println("TotalWage is:"+totalwage);
-
 }
 }
