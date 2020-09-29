@@ -9,21 +9,35 @@ public static final int IS_PART_TIME=0;
 
 public static void main(String[] args)
 {
+//variables
+int totalEmpHours=0;
+int empHrs=0;
+int totalWorkingDays=0;
+
+
 //Display the Welcome Message
 System.out.println("Welcome to the EmployeeWage Program");
 
 //generate 0-2
 int employeeCheck=(int) Math.floor(Math.random()*10)%3;
 
-if( Is_Employee_Present == employeeCheck)
-{ 
-	System.out.println("Employee is present");
-}
-else
-{ 
-	System.out.println("Employee is Absent");
+/*
+* Switch Case
+*/
+switch(employeeCheck)
+{
+case IS_FULL_TIME :
+	System.out.println("Employee is full time");
+	totalEmpHours=8;
+	break;
+case IS_PART_TIME :
+	System.out.println("Employee is part time");
+	totalEmpHours=4;
+	break;
+default :
+	System.out.println("employee absent");
+	break;
 
 }
-
 }
 }
