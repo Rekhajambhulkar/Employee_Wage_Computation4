@@ -4,7 +4,7 @@ public class EmployeeWage
 //CONSTANTS
 public static final int IS_FULL_TIME=1;
 public static final int IS_PART_TIME=0;
-
+p0ubilc
 //Define static method to calculate Employee Wage for multiple Companies
 public static int CalcEmpWageForCompany(String Company, int EmpRatePerHr, int NumOfDays, int MaxHrs)
 {
