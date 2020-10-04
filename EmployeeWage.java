@@ -11,6 +11,7 @@ private final int MaxHrsPerMonth;
 private String Company;
 private int totalEmpWage;
 
+//CONSTRUCTOR
 public EmployeeWage(String Company, int EmpRatePerHr, int NumOfWorkingDays, int MaxHrsPerMonth)
 {
 this.Company = Company;
@@ -78,7 +79,7 @@ EmployeeWage Build1 = new EmployeeWage("Amazon" ,20,2,10);
 
 EmployeeWage Build2 = new EmployeeWage("FlipCKart", 10, 4, 20);
 
-EmployeeWage Build3 = new EmployeeWage("FlipCKart", 25, 4, 15);
+EmployeeWage Build3 = new EmployeeWage("FirstCry", 25, 4, 15);
 
 
 Build1.ComputeEmpWage();
