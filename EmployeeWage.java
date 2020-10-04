@@ -1,12 +1,27 @@
-public class EmployeeWage 
+public class EmployeeWage
 {
 
 //CONSTANTS
-public static final int IS_FULL_TIME=1;
-public static final int IS_PART_TIME=0;
+private static final int IS_FULL_TIME=1;
+private static final int IS_PART_TIME=0;
+
+private final int EmpRatePerHr;
+private final int NumOfWorkingDays;
+private final int MaxHrsPerMonth;
+private String Company;
+private int totalEmpWage;
+
+public EmployeeWage(String Company, int EmpRatePerHr, int NumOfWorkingDays, int MaxHrsPerMonth)
+{
+this.Company = Company;
+this.EmpRatePerHr = EmpRatePerHr;
+this.NumOfWorkingDays = NumOfWorkingDays;
+this.MaxHrsPerMonth = MaxHrsPerMonth;
+}
+
 
 //Define static method to calculate Employee Wage for multiple Companies
-public static int CalcEmpWageForCompany(String Company, int EmpRatePerHr, int NumOfDays, int MaxHrs)
+public void ComputeEmpWage()
 {
 //variables
 int totalEmpHours=0;
@@ -17,7 +32,7 @@ int totalWorkingDays=0;
 System.out.println("Welcome to the EmployeeWage Program");
 
 //Calculate Wages till total working hrs or days is reached for a month
-while(totalEmpHours <= MaxHrs && totalWorkingDays <  NumOfDays )
+while(totalEmpHours <= MaxHrsPerMonth && totalWorkingDays <  NumOfWorkingDays)
 {
 	totalWorkingDays++;
 
@@ -49,17 +64,30 @@ System.out.println("Day:" +totalWorkingDays+"Emp Hour:"+empHrs);
 }
 
 //Display total EmployeeWage per hour
-int totalEmpWage= totalEmpHours * EmpRatePerHr;
-System.out.println("Total Employee Wage for Company:"+Company+ "is:"+totalEmpWage);
-return totalEmpWage;
+totalEmpWage= totalEmpHours * EmpRatePerHr;
+}
+
+public String toString() {
+return "Total Employee Wage for Company:"+Company+ "is:"+totalEmpWage;
 }
 
 public static void main(String[] args) {
-	
+
 //EmployeeWage for Multiple Companies
-int totalwage = CalcEmpWageForCompany("BridgeLabz",20,3,10);
-CalcEmpWageForCompany("Thoughtworks",25,4,20);
-CalcEmpWageForCompany("Capgemini", 30,3,20);
-CalcEmpWageForCompany("Amazon",20,4,10);
+EmployeeWage Build1 = new EmployeeWage("Amazon" ,20,2,10);
+
+EmployeeWage Build2 = new EmployeeWage("FlipCKart", 10, 4, 20);
+
+EmployeeWage Build3 = new EmployeeWage("FlipCKart", 25, 4, 15);
+
+
+Build1.ComputeEmpWage();
+System.out.println(Build1);
+
+Build2.ComputeEmpWage();
+System.out.println(Build2);
+
+Build3.ComputeEmpWage();
+System.out.println(Build3);
 }
 }
