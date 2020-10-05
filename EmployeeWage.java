@@ -7,6 +7,7 @@ interface IntEmployeeWage
 {
 public void addCompanyEmpWage(String Company, int EmpRatePerHr, int NumOfWorkingDays, int MaxHrsPerMonth);
 public void ComputeEmpWage();
+public int getTotalWage(String Company);
 }
 
 class CompanyEmpWage
@@ -113,14 +114,20 @@ System.out.println("Day:" +totalWorkingDays+"Emp Hour:"+empHrs);
 return totalEmpHours * companyEmpWage.EmpRatePerHr;
 }
 
+public int getTotalWage(String Company)
+{
+	return companyEmpWageList.get(Company).totalEmpWage;
+}
+
 public static void main(String[] args) {
 
 //EmployeeWage for Multiple Companies
 IntEmployeeWage empwageBuilder = new EmployeeWage();
-empwageBuilder.addCompanyEmpWage("Amazon",20,2,10);
-empwageBuilder.addCompanyEmpWage("FlipKart",10,4,20);
-empwageBuilder.addCompanyEmpWage("FirstCry",20,4,15);
+empwageBuilder.addCompanyEmpWage(Company:"Amazon", EmpRatePerHr:20, NumOfWorkingDays:2, MaxHrsPerMonth:10);
+empwageBuilder.addCompanyEmpWage(Company:"FlipKart", EmpRatePerHr:10,NumOfWorkingDays:4,MaxHrsPerMonth:20);
+empwageBuilder.addCompanyEmpWage(Company:"FirstCry", EmpRatePerHr:20,NumOfWorkingDays:4,MaxHrsPerMonth:15);
 empwageBuilder.ComputeEmpWage();
+System.out.println("Total Wage for Amazon Company:"+empWageBuilder.getTotalWage(Company:"Amazon"))
 }
 }
 
