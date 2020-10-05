@@ -1,3 +1,10 @@
+//interface declation
+interface IComputeEmpWage
+{
+public void addCompanyEmpWage(String Company, int EmpRatePerHr, int NumOfWorkingDays, int MaxHrsPerMonth);
+public void ComputeEmpWage();
+}
+
 class CompanyEmpWage
 {
 public final int EmpRatePerHr;
@@ -15,7 +22,7 @@ this.MaxHrsPerMonth = MaxHrsPerMonth;
 }
 }
 
-public class EmployeeWage
+public class EmployeeWage implements IComputeEmpWage
 {
 //CONSTANTS
 private static final int IS_FULL_TIME=1;
@@ -28,8 +35,8 @@ public EmployeeWage()
 {
 CompanyEmpWageArray = new CompanyEmpWage[5];
 }
- 
-private void addCompanyEmpWage(String Company, int EmpRatePerHr, int NumOfWorkingDays, int MaxHrsPerMonth)
+  
+public void addCompanyEmpWage(String Company, int EmpRatePerHr, int NumOfWorkingDays, int MaxHrsPerMonth)
 {
 CompanyEmpWageArray[numOfCompany] = new CompanyEmpWage(Company, EmpRatePerHr, NumOfWorkingDays, MaxHrsPerMonth);
 numOfCompany++;
@@ -94,7 +101,7 @@ return totalEmpHours * companyEmpWage.EmpRatePerHr;
 public static void main(String[] args) {
 
 //EmployeeWage for Multiple Companies
-EmployeeWage empwageBuilder = new EmployeeWage();
+IComputeEmpWage empwageBuilder = new EmployeeWage();
 empwageBuilder.addCompanyEmpWage("Amazon",20,2,10);
 empwageBuilder.addCompanyEmpWage("FlipKart",10,4,20);
 empwageBuilder.addCompanyEmpWage("FirstCry",20,4,15);
