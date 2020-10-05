@@ -1,28 +1,76 @@
-public class EmployeeWage 
+package employee;
+
+import java.util.ArrayList;
+
+//interface declation
+interface IntEmployeeWage
 {
+public void addCompanyEmpWage(String Company, int EmpRatePerHr, int NumOfWorkingDays, int MaxHrsPerMonth);
+public void ComputeEmpWage();
+public int getTotalWage(String Company);
+}
 
-//CONSTANTS
-private static final int IS_FULL_TIME=1;
-private static final int IS_PART_TIME=0;
+class CompanyEmpWage
+{
+public final int EmpRatePerHr;
+public final int NumOfWorkingDays;
+public final int MaxHrsPerMonth;
+public String Company;
+public int totalEmpWage;
 
-private final int EmpRatePerHr;
-private final int NumOfWorkingDays;
-private final int MaxHrsPerMonth;
-private String Company;
-private int totalEmpWage;
-
-public EmployeeWage(String Company, int EmpRatePerHr, int NumOfWorkingDays, int MaxHrsPerMonth)
+//CONSTRUCTOR
+public CompanyEmpWage(String Company, int EmpRatePerHr, int NumOfWorkingDays, int MaxHrsPerMonth)
 {
 this.Company = Company;
 this.EmpRatePerHr = EmpRatePerHr;
 this.NumOfWorkingDays = NumOfWorkingDays;
 this.MaxHrsPerMonth = MaxHrsPerMonth;
+totalEmpWage=0;
+}
+
+public void setTotalEmpWage(int totalEmpWage) {
+	this.totalEmpWage=totalEmpWage;
+}
+public void Show()
+{
+	System.out.println("Company Name : "+this.Company+", Total Wage :"+this.totalEmpWage);
+}
+
 }
 
 
-//Define static method to calculate Employee Wage for multiple Companies
+public class EmployeeWage implements IntEmployeeWage
+{
+//CONSTANTS
+private static final int IS_FULL_TIME=1;
+private static final int IS_PART_TIME=0;
+
+private int numOfCompany = 0;
+private ArrayList<CompanyEmpWage> companyEmpWageList;
+
+
+public EmployeeWage()
+{
+companyEmpWageList=new ArrayList<>();
+}
+  
+public void addCompanyEmpWage(String Company, int EmpRatePerHr, int NumOfWorkingDays, int MaxHrsPerMonth)
+{
+companyEmpWageList.add(new CompanyEmpWage(Company, EmpRatePerHr, NumOfWorkingDays, MaxHrsPerMonth));
+}
+
 public void ComputeEmpWage()
 {
+	for(CompanyEmpWage list:companyEmpWageList)
+{
+list.setTotalEmpWage(ComputeEmpWage(list));
+list.Show();
+	}
+}
+
+public int ComputeEmpWage(CompanyEmpWage companyEmpWage)
+{
+
 //variables
 int totalEmpHours=0;
 int empHrs=0;
@@ -31,8 +79,8 @@ int totalWorkingDays=0;
 //Display the Welcome Message
 System.out.println("Welcome to the EmployeeWage Program");
 
-//Calculate Wages till total working hrs or days is reached for a month
-while(totalEmpHours <= MaxHrsPerMonth && totalWorkingDays <  NumOfWorkingDays )
+//Computation
+while(totalEmpHours <= companyEmpWage.MaxHrsPerMonth && totalWorkingDays <  companyEmpWage.NumOfWorkingDays)
 {
 	totalWorkingDays++;
 
@@ -63,33 +111,23 @@ System.out.println("Day:" +totalWorkingDays+"Emp Hour:"+empHrs);
 
 }
 
-totalEmpWage = totalEmpHours * EmpRatePerHr;
+return totalEmpHours * companyEmpWage.EmpRatePerHr;
 }
 
-//Display total EmployeeWage per hour
-public String toString() {
-return "Total Employee Wage for Company:"+Company+ "is:"+totalEmpWage;
-
+public int getTotalWage(String Company)
+{
+	return companyEmpWageList.get(Company).totalEmpWage;
 }
 
 public static void main(String[] args) {
 
 //EmployeeWage for Multiple Companies
-EmployeeWage Build1 = new EmployeeWage("Amazon" ,20,2,10);
-
-EmployeeWage Build2 = new EmployeeWage("FlipCKart", 10, 4, 20);
-
-EmployeeWage Build3 = new EmployeeWage("FlipCKart", 25, 4, 15);
-
-
-Build1.ComputeEmpWage();
-System.out.println(Build1);
-
-Build2.ComputeEmpWage();
-System.out.println(Build2);
-
-Build3.ComputeEmpWage();
-System.out.println(Build3);
-
+IntEmployeeWage empwageBuilder = new EmployeeWage();
+empwageBuilder.addCompanyEmpWage(Company:"Amazon", EmpRatePerHr:20, NumOfWorkingDays:2, MaxHrsPerMonth:10);
+empwageBuilder.addCompanyEmpWage(Company:"FlipKart", EmpRatePerHr:10,NumOfWorkingDays:4,MaxHrsPerMonth:20);
+empwageBuilder.addCompanyEmpWage(Company:"FirstCry", EmpRatePerHr:20,NumOfWorkingDays:4,MaxHrsPerMonth:15);
+empwageBuilder.ComputeEmpWage();
+System.out.println("Total Wage for Amazon Company:"+empWageBuilder.getTotalWage(Company:"Amazon"))
 }
 }
+
