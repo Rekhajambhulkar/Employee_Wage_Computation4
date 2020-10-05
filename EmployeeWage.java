@@ -1,5 +1,9 @@
+package employee;
+
+import java.util.ArrayList;
+
 //interface declation
-interface IComputeEmpWage
+interface IntEmployeeWage
 {
 public void addCompanyEmpWage(String Company, int EmpRatePerHr, int NumOfWorkingDays, int MaxHrsPerMonth);
 public void ComputeEmpWage();
@@ -11,6 +15,7 @@ public final int EmpRatePerHr;
 public final int NumOfWorkingDays;
 public final int MaxHrsPerMonth;
 public String Company;
+public int totalEmpWage;
 
 //CONSTRUCTOR
 public CompanyEmpWage(String Company, int EmpRatePerHr, int NumOfWorkingDays, int MaxHrsPerMonth)
@@ -19,36 +24,46 @@ this.Company = Company;
 this.EmpRatePerHr = EmpRatePerHr;
 this.NumOfWorkingDays = NumOfWorkingDays;
 this.MaxHrsPerMonth = MaxHrsPerMonth;
-}
+totalEmpWage=0;
 }
 
-public class EmployeeWage implements IComputeEmpWage
+public void setTotalEmpWage(int totalEmpWage) {
+	this.totalEmpWage=totalEmpWage;
+}
+public void Show()
+{
+	System.out.println("Company Name : "+this.Company+", Total Wage :"+this.totalEmpWage);
+}
+
+}
+
+
+public class EmployeeWage implements IntEmployeeWage
 {
 //CONSTANTS
 private static final int IS_FULL_TIME=1;
 private static final int IS_PART_TIME=0;
 
 private int numOfCompany = 0;
-private CompanyEmpWage[] CompanyEmpWageArray;
+private ArrayList<CompanyEmpWage> companyEmpWageList;
+
 
 public EmployeeWage()
 {
-CompanyEmpWageArray = new CompanyEmpWage[5];
+companyEmpWageList=new ArrayList<>();
 }
   
 public void addCompanyEmpWage(String Company, int EmpRatePerHr, int NumOfWorkingDays, int MaxHrsPerMonth)
 {
-CompanyEmpWageArray[numOfCompany] = new CompanyEmpWage(Company, EmpRatePerHr, NumOfWorkingDays, MaxHrsPerMonth);
-numOfCompany++;
+companyEmpWageList.add(new CompanyEmpWage(Company, EmpRatePerHr, NumOfWorkingDays, MaxHrsPerMonth));
 }
 
 public void ComputeEmpWage()
 {
-	for(int i = 0; i < numOfCompany; i++)
-	{
-		int totalEmpWage = this.ComputeEmpWage(CompanyEmpWageArray[i]);
-	        System.out.println("Total Employeewage for Company"+CompanyEmpWageArray[i].Company+ " is:"+totalEmpWage);
-
+	for(CompanyEmpWage list:companyEmpWageList)
+{
+list.setTotalEmpWage(ComputeEmpWage(list));
+list.Show();
 	}
 }
 
@@ -101,7 +116,7 @@ return totalEmpHours * companyEmpWage.EmpRatePerHr;
 public static void main(String[] args) {
 
 //EmployeeWage for Multiple Companies
-IComputeEmpWage empwageBuilder = new EmployeeWage();
+IntEmployeeWage empwageBuilder = new EmployeeWage();
 empwageBuilder.addCompanyEmpWage("Amazon",20,2,10);
 empwageBuilder.addCompanyEmpWage("FlipKart",10,4,20);
 empwageBuilder.addCompanyEmpWage("FirstCry",20,4,15);
